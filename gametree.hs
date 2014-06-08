@@ -1,3 +1,5 @@
+{-# LANGUAGE DeriveFunctor #-}
+
 import Data.List
 import qualified Data.Foldable as F
 import Data.Monoid
@@ -15,7 +17,7 @@ moves position =
     let turn = whose_turn position 
     in map (replaceAt turn position) [index | (index, e) <- zip [0..] position, (e == 0)]
 
-data Tree a = EmptyTree | Node a [Tree a] deriving (Show, Eq)
+data Tree a = EmptyTree | Node a [Tree a] deriving (Functor, Show, Eq)
 
 instance F.Foldable Tree where
     foldMap f EmptyTree = mempty
